@@ -133,6 +133,76 @@
           }
         }
       }
+    },
+    "NgxCliLibDemoCrud": {
+      "root": "projects/ngx-cli-lib-demo-crud",
+      "sourceRoot": "projects/ngx-cli-lib-demo-crud/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-cli-lib-demo-crud/tsconfig.lib.json",
+            "project": "projects/ngx-cli-lib-demo-crud/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-cli-lib-demo-crud/src/test.ts",
+            "tsConfig": "projects/ngx-cli-lib-demo-crud/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-cli-lib-demo-crud/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-cli-lib-demo-crud/tsconfig.lib.json",
+              "projects/ngx-cli-lib-demo-crud/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-components": {
+      "root": "projects/ng-components",
+      "sourceRoot": "projects/ng-components/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-components/tsconfig.lib.json",
+            "project": "projects/ng-components/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-components/src/test.ts",
+            "tsConfig": "projects/ng-components/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-components/tsconfig.lib.json",
+              "projects/ng-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-cli-lib-demo"

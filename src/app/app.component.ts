@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { JsonTestService } from './json-test.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'ngx-cli-lib-demo';
+  title = 'app';
+
+  constructor(
+    private jsonTestService: JsonTestService,
+  ) { }
+
+  // tslint:disable-next-line: use-life-cycle-interface
+  ngOnInit() {
+
+    this.jsonTestService.get('prueba', 'posts')
+      .subscribe(
+        (response) => {
+          console.log('get', response);
+        }
+      );
+  }
+  decirHola() {
+    console.log('Hola');
+  }
 }
+

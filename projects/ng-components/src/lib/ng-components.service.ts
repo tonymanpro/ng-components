@@ -1,4 +1,4 @@
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
@@ -9,12 +9,13 @@ import * as _ from 'lodash';
 export abstract class NgComponentsService {
 
   protected abstract apiArray: any[];
+  public errorCode: any;
   protected abstract bearerToken: string;
 
   constructor(
     private http: HttpClient,
     public router: Router
-  ) { }
+  ) { this.chargeError(); }
 
   get(apiName: string, service: string, customHeader?: any): Observable<any> {
     const _url = this.url(apiName, service);
@@ -46,7 +47,7 @@ export abstract class NgComponentsService {
       let _request: any = null;
       const _bodyStr = JSON.stringify(body);
 
-      let header = {
+      const header = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.bearerToken}`
       };
@@ -103,33 +104,19 @@ export abstract class NgComponentsService {
     }
 
     if (error instanceof HttpErrorResponse) {
-      // Server or connection error happened
       if (!navigator.onLine) {
-        // Handle offline error
-        errMsg = 'Servicio fuera de linea, favor intente más tarde';
+        errMsg = this.errorMessage(-2);
       } else if (error.status) {
-        switch (error.status) {
-          case 401:
-            this.router.navigate(['logout'], { queryParams: { isSesionExpired: true } });
-            return;
-          case 400:
-          case 500:
-            errMsg = 'Lo sentimos hubo un error en la applicación, por favor intente más tarde';
-            break;
-          case 404:
-          case 501:
-          case 502:
-          case 503:
-          case 504:
-            errMsg = 'Error con el servidor, favor trate más tarde';
-            break;
-          case -1:
-            errMsg = 'Tiempo de espera excedido, favor intente en unos momentos';
-            break;
-          default:
-            console.error(error);
-            errMsg = error.error && (error.error.message && error.error.message != 'null') ?
-              error.error.message : 'Lo sentimos hubo un error en la applicación, por favor intente más tarde';
+        if (error.status === 401) {
+          this.router.navigate(['logout'], { queryParams: { isSesionExpired: true } });
+          return;
+        } else {
+          console.log('exists');
+          console.log(this.errorCode);
+          const existError = this.errorCode.find((api: any) => {
+            return api['code'] === error.status;
+          });
+          errMsg = existError ? this.errorMessage(error.status) : error.error.message;
         }
       }
     } else if (error.error instanceof ErrorEvent) {
@@ -147,10 +134,12 @@ export abstract class NgComponentsService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
+
     return observableThrowError(new Error(errMsg ? errMsg : 'Something bad happened; please try again later.'));
   }
 
   public url(apiName: string, service: string): string {
+    console.log('url');
     const _api = this.apiArray.find((api: any) => {
       return api['name'] === apiName;
     });
@@ -159,6 +148,31 @@ export abstract class NgComponentsService {
       return `${_apiUrl}/${service}`;
     }
     return null;
+  }
+
+  public errorMessage(code: any): string {
+    console.log('message');
+    const _api = this.errorCode.find((api: any) => {
+      return api['code'] === code;
+    });
+    if (_api) {
+      return _api['message'];
+    } else {
+      return this.errorCode['default'];
+    }
+  }
+
+  public chargeError() {
+
+    this.http.get('./assets/errorHandler.js', { responseType: 'json'})
+      .subscribe(
+        data => {
+          this.errorCode = data;
+        },
+        (err: HttpErrorResponse) => {
+          console.log(`ErrorPapu: ${err.message}`);
+        }
+      );
   }
 
 }

@@ -29,7 +29,9 @@
             "styles": [
               "src/styles.sass"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/errorHandler.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -85,7 +87,9 @@
             "styles": [
               "src/styles.sass"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/errorHandler.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

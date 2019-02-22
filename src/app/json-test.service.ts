@@ -12,7 +12,7 @@ export class JsonTestService extends NgComponentsService {
     { name: 'prueba', url: 'https://jsonplaceholder.typicode.com' },
     { name: 'kipo', url: 'https://ms-kipo-dot-apis-impesa-dev.appspot.com/kipo' }
   ];
-  protected bearerToken: string = 'holas';
+  protected bearerToken = 'holas';
 
   constructor(
     http: HttpClient,

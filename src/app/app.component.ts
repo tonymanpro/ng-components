@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'ng-Components';
 
   constructor(
     private jsonTestService: JsonTestService,
@@ -15,6 +15,8 @@ export class AppComponent {
 
   // tslint:disable-next-line: use-life-cycle-interface
   ngOnInit() {
+
+    localStorage.setItem('PERMISSION', '["/", "/dashboard", "/dashboard/agregar"]');
 
     this.jsonTestService.get('prueba', 'posts')
       .subscribe(

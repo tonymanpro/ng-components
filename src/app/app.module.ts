@@ -5,10 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgComponentsModule } from 'ng-components';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PermisionComponent } from 'projects/ng-components/src/public_api';
+import { DetailComponent } from './dashboard/detail/detail.component';
+import { EditComponent } from './dashboard/edit/edit.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    DetailComponent,
+    EditComponent,
+    PermisionComponent
   ],
   imports: [
     BrowserModule,
@@ -16,7 +24,7 @@ import { NgComponentsModule } from 'ng-components';
     HttpClientModule,
     NgComponentsModule
   ],
-  providers: [],
+  providers: [PermisionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

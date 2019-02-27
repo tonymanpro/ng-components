@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 })
 export class JsonTestService extends NgComponentsService {
 
-  protected apiArray: any[] =[
+  protected apiArray: any[] = [
     { name: 'prueba', url: 'https://jsonplaceholder.typicode.com' },
     { name: 'kipo', url: 'https://ms-kipo-dot-apis-impesa-dev.appspot.com/kipo' }
   ];
-  protected bearerToken = 'holas';
+  protected bearerToken = '23454t6fghsg7h5e7h547h5h7655557h5';
+  protected lang = 'es';
 
   constructor(
     http: HttpClient,

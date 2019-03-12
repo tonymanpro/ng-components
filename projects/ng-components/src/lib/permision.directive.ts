@@ -18,7 +18,6 @@ export class PermisionDirective {
   }
 
   private _checkPermisions(): void {
-    debugger;
     const currentUrl = `${this.router.url}/${this.action}`.toLowerCase();
     const el: HTMLElement = this._elementRef.nativeElement;
     const permissions = JSON.parse(localStorage.getItem('PERMISSION')) as Array<string>;

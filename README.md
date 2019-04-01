@@ -21,7 +21,7 @@ when
 - bearerToken is used if your API use authentication
 - lang is the culture used to management error
 
-* Entend your service class from 'NgComponentsService'
+* Extend your service class from 'NgComponentsService'
 
 
 ```javascript

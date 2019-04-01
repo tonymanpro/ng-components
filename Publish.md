@@ -2,11 +2,11 @@
 
 * Complete guide: https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5
 
-#build_lib
+# build_lib
 Build the Angular Library.
-#copy-files
+# copy-files
 Copy both README.md and LICENSE to the dist\ng-example-library folder.
-#npm_pack
+# npm_pack
 Package up the dist\ng-example-library folder into a tgz file.
 
 ```javascript

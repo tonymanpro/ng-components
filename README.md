@@ -1,3 +1,5 @@
+<a href="https://paypal.me/tonymanpro?locale.x=es_XC"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
+
 
 ## Use clickOutside
 
